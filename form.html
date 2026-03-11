@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>User Registration Form</title>
+
+  <style>
+    /* === PAGE LAYOUT === */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 520px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2d3748;
+      margin-bottom: 28px;
+      font-size: 1.6rem;
+    }
+
+    /* === INPUT FIELDS === */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    select:focus {
+      border-color: #4299e1;
+      outline: none;
+    }
+
+    .date-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .date-row input {
+      flex: 1;
+      padding: 10px 8px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .date-row input:focus {
+      border-color: #4299e1;
+      outline: none;
+    }
+
+    .date-hint {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-top: 4px;
+    }
+
+    /* === ERROR MESSAGES === */
+    .error-msg {
+      color: #e53e3e;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* === SUBMIT BUTTON === */
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4299e1;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: #2b6cb0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>User Registration</h1>
+
+    <form id="registrationForm"
+          action="http://www.it.murdoch.edu.au/cgi-bin/reply1.pl"
+          method="GET">
+
+      <!-- ===== FULL NAME SECTION ===== -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name"
+               placeholder="e.g. Jane Smith"
+               maxlength="60">
+        <span class="error-msg" id="nameError">
+          Please enter your full name (letters and spaces only, 2–60 characters).
+        </span>
+      </div>
+
+      <!-- ===== PHONE NUMBER SECTION ===== -->
+      <div class="form-group">
+        <label for="phone">Phone Number (with prefix)</label>
+        <input type="tel" id="phone" name="phone"
+               placeholder="e.g. +61412345678 or 0412345678"
+               maxlength="20">
+        <span class="error-msg" id="phoneError">
+          Please enter a valid phone number (digits, spaces, +, - only; 7–20 characters).
+        </span>
+      </div>
+
+      <!-- ===== BIRTH DATE SECTION ===== -->
+      <div class="form-group">
+        <label>Date of Birth</label>
+        <div class="date-row">
+          <input type="text" id="birthDay"   name="birthDay"   placeholder="DD"   maxlength="2">
+          <input type="text" id="birthMonth" name="birthMonth" placeholder="MM"   maxlength="2">
+          <input type="text" id="birthYear"  name="birthYear"  placeholder="YYYY" maxlength="4">
+        </div>
+        <span class="error-msg" id="dateError">Please enter a valid date of birth.</span>
+      </div>
+
+      <!-- ===== FAVOURITE PASTIME SELECTION ===== -->
+      <div class="form-group">
+        <label for="pastime">Favourite Pastime</label>
+        <select id="pastime" name="pastime">
+          <option value="">-- Please select --</option>
+          <option value="Surfing the Web">Surfing the Web</option>
+          <option value="Playing Sports">Playing Sports</option>
+          <option value="Listening to Music">Listening to Music</option>
+          <option value="Watching TV">Watching TV</option>
+          <option value="Playing Games">Playing Games</option>
+          <option value="Community Service">Community Service</option>
+          <option value="Daydreaming">Daydreaming</option>
+          <option value="Reading">Reading</option>
+          <option value="Meditation">Meditation</option>
+        </select>
+        <span class="error-msg" id="pastimeError">Please select a favourite pastime.</span>
+      </div>
+
+      <!-- ===== SUBMIT BUTTON ===== -->
+      <button type="submit" class="submit-btn">Submit</button>
+
+    </form>
+  </div>
