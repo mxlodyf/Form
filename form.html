@@ -259,35 +259,35 @@
             var year  = parseInt(yearVal,  10);
 
             if (!/^\d{1,2}$/.test(dayVal) || !/^\d{1,2}$/.test(monthVal) || !/^\d{4}$/.test(yearVal)) {
-            showError("dateError", true);
-            return false;
+                showError("dateError", true);
+                return false;
             }
 
             if (month < 1 || month > 12) {
-            showError("dateError", true);
-            return false;
+                showError("dateError", true);
+                return false;
             }
 
             if (year < 1900) {
-            showError("dateError", true);
-            return false;
+                showError("dateError", true);
+                return false;
             }
 
             if (day < 1 || day > daysInMonth(month, year)) {
-            showError("dateError", true);
-            return false;
+                showError("dateError", true);
+                return false;
             }
 
             var today = new Date();
             var todayInt = today.getFullYear() * 10000
-                        + (today.getMonth() + 1) * 100
-                        + today.getDate();
+                            + (today.getMonth() + 1) * 100
+                            + today.getDate();
 
             var inputInt = year * 10000 + month * 100 + day;
 
             if (inputInt > todayInt) {
-            showError("dateError", true);
-            return false;
+                showError("dateError", true);
+                return false;
             }
 
             showError("dateError", false);
