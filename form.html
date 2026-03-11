@@ -193,14 +193,16 @@
     <script>
         // ============================================================
         // INVALID INPUT HANDLING
+        // Shows an error message below the relevant input field if the input is invalid.
         // ============================================================
         function showError(id, show) {
             var el = document.getElementById(id);
             el.style.display = show ? "block" : "none";
         }
+
         // ============================================================
         // NAME INPUT VALIDATION
-        // Rules:
+        // Validates the name input according to the following criteria:
         //   - Must not be empty
         //   - Must only contain letters and spaces
         //   - Must be between 2 and 60 characters in length
@@ -219,9 +221,10 @@
 
         // ============================================================
         // PHONE NUMBER INPUT VALIDATION
-        // Rules:
-        //   - Must contain only digits, spaces, +, and - allowed
-        //   - Must contain 7 to 20 characters total
+        // Validates the phone number input according to the following criteria:
+        //   - Must not be empty
+        //   - Must contain only digits, spaces, +, and -
+        //   - Must be between 7 and 20 characters in length
         // ============================================================
         function validatePhone() {
             var phone = document.getElementById("phone").value.trim();
@@ -237,14 +240,85 @@
         }
 
         // ============================================================
-        // FORM INPUT VALIDATION
+        // DATE INPUT VALIDATION
+        // Validates the date input according to the following criteria:
+        //   - Must all be numeric integers
+        //   - Date must not be in the future
+        //   - Day must be 1 through the last day of the given month
+        //   - Month must be 1–12
+        //   - Year must be >= 1900
+        //   - Handle leap years
         // ============================================================
-        function validateForm() {
-            var nameOk    = validateName();
-            var phoneOk   = validatePhone();
+        function validateDate() {
+            var dayVal   = document.getElementById("birthDay").value.trim();
+            var monthVal = document.getElementById("birthMonth").value.trim();
+            var yearVal  = document.getElementById("birthYear").value.trim();
 
-            return nameOk && phoneOk;
+            var day   = parseInt(dayVal,   10);
+            var month = parseInt(monthVal, 10);
+            var year  = parseInt(yearVal,  10);
+
+            if (!/^\d{1,2}$/.test(dayVal) || !/^\d{1,2}$/.test(monthVal) || !/^\d{4}$/.test(yearVal)) {
+            showError("dateError", true);
+            return false;
+            }
+
+            if (month < 1 || month > 12) {
+            showError("dateError", true);
+            return false;
+            }
+
+            if (year < 1900) {
+            showError("dateError", true);
+            return false;
+            }
+
+            if (day < 1 || day > daysInMonth(month, year)) {
+            showError("dateError", true);
+            return false;
+            }
+
+            var today = new Date();
+            var todayInt = today.getFullYear() * 10000
+                        + (today.getMonth() + 1) * 100
+                        + today.getDate();
+
+            var inputInt = year * 10000 + month * 100 + day;
+
+            if (inputInt > todayInt) {
+            showError("dateError", true);
+            return false;
+            }
+
+            showError("dateError", false);
+            return true;
         }
+
+        // ============================================================
+        // HELPER FUNCTION FOR DATE VALIDATION
+        // Return the number of days in a given month of a given year.
+        // ============================================================
+        function daysInMonth(month, year) {
+            var days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            if (month === 2 && isLeapYear(year)) {
+                return 29;
+            }
+
+            return days[month];
+        }
+
+    // ============================================================
+    // FORM INPUT VALIDATION
+    // Validates all form inputs and returns true if all are valid, false otherwise.
+    // ============================================================
+    function validateForm() {
+        var nameOk    = validateName();
+        var phoneOk   = validatePhone();
+        var dateOk    = validateDate();
+
+        return nameOk && phoneOk && dateOk;
+    }
             
     </script>
 
