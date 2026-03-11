@@ -215,6 +215,7 @@
                 showError("nameError", true);
                 return false;
             }
+
             showError("nameError", false);
             return true;
         }
@@ -235,6 +236,7 @@
                 showError("phoneError", true);
                 return false;
             }
+
             showError("phoneError", false);
             return true;
         }
@@ -308,17 +310,34 @@
             return days[month];
         }
 
-    // ============================================================
-    // FORM INPUT VALIDATION
-    // Validates all form inputs and returns true if all are valid, false otherwise.
-    // ============================================================
-    function validateForm() {
-        var nameOk    = validateName();
-        var phoneOk   = validatePhone();
-        var dateOk    = validateDate();
+        // ============================================================
+        // PASTIME SELECTION VALIDATION
+        // Validates that the user has selected a non-empty option from the dropdown menu.
+        // ============================================================
+        function validatePastime() {
+            var pastime = document.getElementById("pastime").value;
 
-        return nameOk && phoneOk && dateOk;
-    }
+            if (pastime === "") {
+                showError("pastimeError", true);
+                return false;
+            }
+
+            showError("pastimeError", false);
+            return true;
+        }
+
+        // ============================================================
+        // FORM INPUT VALIDATION
+        // Validates all form inputs and returns true if all are valid, false otherwise.
+        // ============================================================
+        function validateForm() {
+            var nameOk    = validateName();
+            var phoneOk   = validatePhone();
+            var dateOk    = validateDate();
+            var pastimeOk = validatePastime();
+
+            return nameOk && phoneOk && dateOk && pastimeOk;
+        }
             
     </script>
 
